@@ -1,425 +1,108 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(180deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
-    min-height: 100vh;
-    overflow-x: hidden;
-    color: #831843;
-}
-
-.floating-container {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.floating-element {
-    position: absolute;
-    font-size: 24px;
-    opacity: 0.4;
-    animation: floating 8s ease-in-out infinite;
-}
-
-@keyframes floating {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.4;
-    }
-    50% {
-        transform: translateY(-30px) rotate(180deg);
-        opacity: 0.6;
-    }
-}
-
-.scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.5);
-    z-index: 1000;
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #ec4899, #db2777);
-    width: 0%;
-    transition: width 0.3s ease;
-}
-
-.page-section {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-    position: relative;
-    z-index: 1;
-    opacity: 0.3;
-    transition: opacity 0.8s ease;
-}
-
-.page-section.active {
-    opacity: 1;
-}
-
-.content-wrapper {
-    max-width: 900px;
-    width: 100%;
-    text-align: center;
-}
-
-.flower-decoration {
-    position: fixed;
-    font-size: 3em;
-    z-index: 2;
-    animation: flowerFloat 4s ease-in-out infinite;
-}
-
-.top-left { top: 20px; left: 20px; }
-.top-right { top: 20px; right: 20px; }
-.bottom-left { bottom: 20px; left: 20px; }
-.bottom-right { bottom: 20px; right: 20px; }
-
-@keyframes flowerFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(10deg); }
-}
-
-.main-title {
-    font-size: 3.5em;
-    color: #be185d;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    animation: titleGlow 3s ease-in-out infinite;
-}
-
-@keyframes titleGlow {
-    0%, 100% { text-shadow: 0 0 10px rgba(236, 72, 153, 0.5); }
-    50% { text-shadow: 0 0 20px rgba(236, 72, 153, 0.8); }
-}
-
-.subtitle {
-    font-size: 1.5em;
-    color: #9d174d;
-    margin-bottom: 40px;
-    font-style: italic;
-}
-
-.scroll-hint {
-    margin-top: 60px;
-    animation: bounce 2s ease-in-out infinite;
-}
-
-.scroll-hint span {
-    display: block;
-    font-size: 1.2em;
-    color: #be185d;
-    margin-bottom: 10px;
-}
-
-.scroll-arrow {
-    width: 30px;
-    height: 30px;
-    border-right: 3px solid #be185d;
-    border-bottom: 3px solid #be185d;
-    transform: rotate(45deg);
-    margin: 0 auto;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(10px); }
-}
-
-.section-title {
-    font-size: 2.8em;
-    color: #be185d;
-    margin-bottom: 40px;
-}
-
-.thank-you-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-}
-
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(190, 24, 93, 0.15);
-    transition: all 0.4s ease;
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(190, 24, 93, 0.25);
-}
-
-.card-icon {
-    font-size: 3em;
-    margin-bottom: 15px;
-}
-
-.card h3 {
-    font-size: 1.4em;
-    color: #be185d;
-    margin-bottom: 10px;
-}
-
-.card p {
-    font-size: 1em;
-    color: #9d174d;
-    line-height: 1.6;
-}
-
-.qualities-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.quality-item {
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(190, 24, 93, 0.1);
-    opacity: 0;
-    transform: translateX(-50px);
-    transition: all 0.6s ease;
-}
-
-.quality-item.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.quality-item:nth-child(even) {
-    transform: translateX(50px);
-}
-
-.quality-item:nth-child(even).visible {
-    transform: translateX(0);
-}
-
-.quality-number {
-    font-size: 2em;
-    font-weight: bold;
-    color: #fbcfe8;
-    margin-right: 20px;
-    min-width: 60px;
-}
-
-.quality-text {
-    flex: 1;
-    text-align: left;
-}
-
-.quality-text h3 {
-    font-size: 1.5em;
-    color: #be185d;
-    margin-bottom: 5px;
-}
-
-.quality-text p {
-    color: #9d174d;
-    font-size: 1em;
-}
-
-.quality-icon {
-    font-size: 2.5em;
-    margin-left: 20px;
-}
-
-.section-title.final {
-    font-size: 2.5em;
-    margin-bottom: 30px;
-}
-
-.final-message {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(190, 24, 93, 0.15);
-    margin-bottom: 30px;
-}
-
-.message-text {
-    font-size: 1.2em;
-    color: #9d174d;
-    line-height: 1.8;
-    margin-bottom: 15px;
-}
-
-.message-highlight {
-    font-size: 1.8em;
-    color: #be185d;
-    font-weight: bold;
-    margin: 25px 0;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-/* ===== ГАЛЕРЕЯ ФОТОГРАФИЙ ===== */
-.photo-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin: 30px 0 40px;
-    padding: 20px;
-}
-
-.photo-frame {
-    position: relative;
-    background: white;
-    padding: 12px 12px 35px 12px;
-    border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-}
-
-.photo-frame:hover {
-    transform: scale(1.05) rotate(0deg) !important;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    z-index: 10;
-}
-
-.photo-frame::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-    border: 2px solid #fbcfe8;
-    border-radius: 2px;
-    pointer-events: none;
-}
-
-.photo-img {
-    width: 180px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 2px;
-    display: block;
-}
-
-.photo-caption {
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.5em;
-    opacity: 0.8;
-}
-
-/* Разные углы для фото */
-.frame-1 { transform: rotate(-8deg); }
-.frame-2 { transform: rotate(6deg); }
-.frame-3 { transform: rotate(-4deg); }
-.frame-4 { transform: rotate(7deg); }
-
-/* Анимация появления фото */
-.photo-frame {
-    opacity: 0;
-    animation: photoAppear 0.6s ease forwards;
-}
-
-.photo-frame:nth-child(1) { animation-delay: 0.2s; }
-.photo-frame:nth-child(2) { animation-delay: 0.4s; }
-.photo-frame:nth-child(3) { animation-delay: 0.6s; }
-.photo-frame:nth-child(4) { animation-delay: 0.8s; }
-
-@keyframes photoAppear {
-    from {
-        opacity: 0;
-        transform: rotate(var(--rotate, 0deg)) translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: rotate(var(--rotate, 0deg)) translateY(0);
-    }
-}
-
-.signature {
-    margin-top: 40px;
-}
-
-.hearts-row {
-    font-size: 1.5em;
-    margin: 10px 0;
-    letter-spacing: 10px;
-}
-
-.signature-text {
-    font-size: 1.3em;
-    color: #9d174d;
-    font-style: italic;
-}
-
-.signature-name {
-    font-size: 2em;
-    color: #be185d;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .main-title { font-size: 2.2em; }
-    .subtitle { font-size: 1.1em; }
-    .section-title { font-size: 2em; }
-    .thank-you-cards { grid-template-columns: 1fr; }
-    .quality-item { flex-direction: column; text-align: center; }
-    .quality-text { text-align: center; margin: 15px 0; }
-    .quality-number { margin-right: 0; }
-    .quality-icon { margin-left: 0; margin-top: 10px; }
-    .final-message { padding: 25px; }
-    .message-highlight { font-size: 1.4em; }
-    .flower-decoration { font-size: 2em; }
+// Создание плавающих элементов фона
+function createFloatingElements() {
+    const container = document.getElementById('floatingContainer');
+    const elements = ['🌸', '🌺', '🌷', '🌹', '💕', '✨', '🦋', ''];
     
-    .photo-gallery { gap: 15px; }
-    .photo-img { width: 140px; height: 140px; }
-    .photo-frame { padding: 8px 8px 28px 8px; }
+    for (let i = 0; i < 20; i++) {
+        setTimeout(function() {
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+            element.textContent = elements[Math.floor(Math.random() * elements.length)];
+            element.style.left = Math.random() * 100 + '%';
+            element.style.top = Math.random() * 100 + '%';
+            element.style.fontSize = (Math.random() * 20 + 16) + 'px';
+            element.style.animationDelay = (Math.random() * 4) + 's';
+            container.appendChild(element);
+        }, i * 200);
+    }
 }
 
-@media (max-width: 480px) {
-    .main-title { font-size: 1.8em; }
-    .card { padding: 20px; }
-    .card-icon { font-size: 2em; }
-    .quality-number { font-size: 1.5em; min-width: 40px; }
-    .quality-text h3 { font-size: 1.2em; }
+// Индикатор прогресса прокрутки
+function updateProgressBar() {
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
     
-    .photo-img { width: 120px; height: 120px; }
-    .photo-frame { padding: 6px 6px 24px 6px; }
-    .frame-1, .frame-2, .frame-3, .frame-4 { transform: rotate(0deg) !important; }
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        progressBar.style.width = scrollPercent + '%';
+    }
+}
+
+// Определение видимой секции
+function updateActiveSection() {
+    const sections = document.querySelectorAll('.page-section');
+    const scrollPosition = window.pageYOffset + window.innerHeight / 2;
+    
+    sections.forEach(function(section) {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            sections.forEach(function(s) {
+                s.classList.remove('active');
+            });
+            section.classList.add('active');
+        }
+    });
+}
+
+// Анимация появления элементов при прокрутке
+function animateOnScroll() {
+    const cards = document.querySelectorAll('.card');
+    const qualityItems = document.querySelectorAll('.quality-item');
+    const photoFrames = document.querySelectorAll('.photo-frame');
+    
+    cards.forEach(function(card) {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            card.classList.add('visible');
+        }
+    });
+    
+    qualityItems.forEach(function(item, index) {
+        const rect = item.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            setTimeout(function() {
+                item.classList.add('visible');
+            }, index * 150);
+        }
+    });
+    
+    // Анимация фото при появлении на странице 4
+    if (document.getElementById('page4').classList.contains('active')) {
+        photoFrames.forEach(function(frame, index) {
+            setTimeout(function() {
+                frame.style.opacity = '1';
+            }, index * 200);
+        });
+    }
+}
+
+// Плавная прокрутка к секциям
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// Инициализация при загрузке
+function init() {
+    createFloatingElements();
+    
+    window.addEventListener('scroll', function() {
+        updateProgressBar();
+        updateActiveSection();
+        animateOnScroll();
+    });
+    
+    setTimeout(animateOnScroll, 500);
+}
+
+// Запуск после загрузки страницы
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
 }
