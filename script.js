@@ -69,7 +69,7 @@ function animateOnScroll() {
     });
 }
 
-// Плавная прокрутка к секциям (для навигации если понадобится)
+// Плавная прокрутка к секциям
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -81,14 +81,12 @@ function scrollToSection(sectionId) {
 function init() {
     createFloatingElements();
     
-    // Обработчик прокрутки
     window.addEventListener('scroll', function() {
         updateProgressBar();
         updateActiveSection();
         animateOnScroll();
     });
     
-    // Первичная проверка видимости
     setTimeout(animateOnScroll, 500);
 }
 
